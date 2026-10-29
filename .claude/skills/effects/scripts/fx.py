@@ -1310,10 +1310,10 @@ def glass_widgets_v2(c, e):
     bw, bh = 400 * u, 150 * u; bx, by = W - 50 * u - bw / 2, 118 * u + bh / 2
     b = G(bw, bh, bx, by, bh * 0.28); d = ImageDraw.Draw(b); p = ease_inout(c.lt / max(0.3, e.d * 0.85))
     d.ellipse([bh * 0.17, bh * 0.2, bh * 0.28, bh * 0.31], fill=(255, 69, 58, 255))
-    d.text((bh * 0.36, bh * 0.255), 'Rendering', font=font('uim', bh * 0.19), fill=white + (240,), anchor='lm')
+    d.text((bh * 0.36, bh * 0.255), e.o.get('bar', 'Rendering'), font=font('uim', bh * 0.19), fill=white + (240,), anchor='lm')
     d.rounded_rectangle([bh * 0.17, bh * 0.5, bw - bh * 0.17, bh * 0.6], bh * 0.05, fill=white + (70,))
     d.rounded_rectangle([bh * 0.17, bh * 0.5, bh * 0.17 + (bw - bh * 0.34) * max(0.04, p), bh * 0.6], bh * 0.05, fill=white + (245,))
-    d.text((bh * 0.17, bh * 0.78), f"4K render  ·  {int(p * 100)}%", font=font('uim', bh * 0.14), fill=white + (210,), anchor='lm')
+    d.text((bh * 0.17, bh * 0.78), f"{e.o.get('bar_sub', '4K render')}  ·  {int(p * 100)}%", font=font('uim', bh * 0.14), fill=white + (210,), anchor='lm')
     show(b, bx, by, 1)
     # 3 · profile
     cy3 = by + bh / 2 + 22 * u + bh / 2
@@ -1325,11 +1325,11 @@ def glass_widgets_v2(c, e):
     # 4 · views artifact (a mini page inside the glass)
     aw, ah = 330 * u, 330 * u; dx, dy = 50 * u + aw / 2, ay + S / 2 + 26 * u + ah / 2
     art = G(aw, ah, dx, dy, 44 * u); d = ImageDraw.Draw(art)
-    d.text((24 * u, 30 * u), 'artifact · views.html', font=font('mono', 15 * u), fill=white + (220,), anchor='lm')
+    d.text((24 * u, 30 * u), e.o.get('art', 'artifact · views.html'), font=font('mono', 15 * u), fill=white + (220,), anchor='lm')
     inn = rrect(aw - 36 * u, ah - 74 * u, 20 * u, (250, 248, 244, 255)); di = ImageDraw.Draw(inn); iw, ih = inn.size
     for j in range(3): di.ellipse([14 * u + j * 16 * u, 14 * u, 24 * u + j * 16 * u, 24 * u], fill=((255, 95, 87), (255, 189, 46), (40, 200, 64))[j] + (255,))
-    di.text((16 * u, 40 * u), 'Top reels', font=font('uib', 26 * u), fill=(24, 22, 26, 255))
-    di.text((16 * u, 72 * u), '197K', font=font('anton', 44 * u), fill=(200, 85, 61, 255))
+    di.text((16 * u, 40 * u), e.o.get('art_title', 'Top reels'), font=font('uib', 26 * u), fill=(24, 22, 26, 255))
+    di.text((16 * u, 72 * u), e.o.get('art_value', '197K'), font=font('anton', 44 * u), fill=(200, 85, 61, 255))
     vals = [197, 140, 124, 83, 50, 40, 38]; gx0, gx1, gy1 = 16 * u, iw - 16 * u, ih - 18 * u; bwid = (gx1 - gx0) / 7 * 0.66
     for j, v in enumerate(vals):
         q = ease_out((c.lt - 0.35 - 0.05 * j) / 0.4); hh = (ih * 0.42) * v / 197 * q; x0 = gx0 + (gx1 - gx0) * j / 7
@@ -1346,9 +1346,9 @@ def glass_widgets_v2(c, e):
     for k_ in range(6):
         ang = k_ * math.pi / 3; ad.line([(A / 2 - 26 * u * math.cos(ang), A / 2 - 26 * u * math.sin(ang)), (A / 2 + 26 * u * math.cos(ang), A / 2 + 26 * u * math.sin(ang))], fill=(255, 255, 255, 255), width=int(7 * u))
     mu.alpha_composite(art2, (int(22 * u), int(22 * u)))
-    d.text((134 * u, 44 * u), 'NOW EDITING', font=font('mono', 15 * u), fill=white + (200,), anchor='lm')
+    d.text((134 * u, 44 * u), e.o.get('playing', 'NOW EDITING'), font=font('mono', 15 * u), fill=white + (200,), anchor='lm')
     d.text((134 * u, 78 * u), e.o.get('song', 'soft UI pops'), font=font('uib', 28 * u), fill=white + (255,), anchor='lm')
-    d.text((134 * u, 108 * u), 'sfx · 25.7s', font=font('uim', 20 * u), fill=white + (200,), anchor='lm')
+    d.text((134 * u, 108 * u), e.o.get('song_sub', 'sfx · 25.7s'), font=font('uim', 20 * u), fill=white + (200,), anchor='lm')
     pp = clamp(c.lt / max(0.5, e.d)); d.rounded_rectangle([22 * u, 140 * u, mw - 22 * u, 146 * u], 3 * u, fill=white + (70,))
     d.rounded_rectangle([22 * u, 140 * u, 22 * u + (mw - 44 * u) * pp, 146 * u], 3 * u, fill=white + (240,))
     cxm, cym = mw / 2, 184 * u
@@ -1371,8 +1371,8 @@ def glass_widgets_v2(c, e):
     rg = G(R, R, rx, ry, 56 * u); d = ImageDraw.Draw(rg); rp = ease_inout((c.lt - 0.4) / 1.0); rr = R * 0.34
     d.ellipse([R / 2 - rr, R / 2 - rr - 8 * u, R / 2 + rr, R / 2 + rr - 8 * u], outline=white + (60,), width=int(16 * u))
     if rp > 0: d.arc([R / 2 - rr, R / 2 - rr - 8 * u, R / 2 + rr, R / 2 + rr - 8 * u], -90, -90 + 360 * rp, fill=(52, 199, 89, 255), width=int(16 * u))
-    d.text((R / 2, R / 2 - 8 * u), '4K', font=font('uib', 52 * u), fill=white + (255,), anchor='mm')
-    d.text((R / 2, R - 26 * u), 'render', font=font('uim', 20 * u), fill=white + (210,), anchor='mm')
+    d.text((R / 2, R / 2 - 8 * u), e.o.get('ring', '4K'), font=font('uib', 52 * u), fill=white + (255,), anchor='mm')
+    d.text((R / 2, R - 26 * u), e.o.get('ring_sub', 'render'), font=font('uim', 20 * u), fill=white + (210,), anchor='mm')
     show(rg, rx, ry, 6)
     # 8 · Edited by Claude pill (in front)
     f1, f2 = font('uim', W * 0.045), font('uib', W * 0.045); pre, hi = 'Edited by ', 'Claude'
